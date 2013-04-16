@@ -112,16 +112,16 @@ class CIOLogger {
 	private $_fileHandle = null;
 	
 	/**
-	 * This tells us if we can perform locking on log files
-	 * @var boolean
-	 */
-	private $_canLock = false;
-	
-	/**
 	 * This tells us if we can perform forking before logging
 	 * @var boolean
 	 */
 	private $_canFork = false;
+	
+	/**
+	 * This tells us if we can perform locking on log files
+	 * @var boolean
+	 */
+	private $_canLock = false;
 
 	/**
 	 * Standard messages produced by the class. Can be modified for il8n
@@ -198,8 +198,8 @@ class CIOLogger {
 	 */
 	public function __construct($logDirectory, $severity) {
 		$logDirectory = rtrim($logDirectory, '\\/');
-		$this->_canLock = function_exists('flock');
 		$this->_canFork = function_exists('pcntl_fork');
+		$this->_canLock = $this->_canFork && function_exists('flock');
 
 		if ($severity === self::OFF) {
 			return;
