@@ -64,7 +64,7 @@ class CIOLogger {
 	 * Alias for CRIT
 	 * @deprecated
 	 */
-	const FATAL = 2;
+	const FATAL = self::CRIT;
 
 	/**
 	 * Internal status codes
@@ -380,7 +380,7 @@ class CIOLogger {
 		if ($this->_severityThreshold >= $severity) {
 			$status = $this->_getTimeLine($severity);
 
-			$line = "$status $line";
+			$line = $status.' '.$line;
 
 			if ($args !== self::NO_ARGUMENTS) {
 				/* Print the passed object value */
@@ -442,25 +442,24 @@ class CIOLogger {
 
 		switch ($level) {
 			case self::EMERG:
-				return "$time - EMERG -->";
+				return $time.' - EMERG -->';
 			case self::ALERT:
-				return "$time - ALERT -->";
+				return $time.' - ALERT -->';
 			case self::CRIT:
-				return "$time - CRIT -->";
 			case self::FATAL: # FATAL is an alias of CRIT
-				return "$time - FATAL -->";
+				return $time.' - CRIT -->';
 			case self::NOTICE:
-				return "$time - NOTICE -->";
+				return $time.' - NOTICE -->';
 			case self::INFO:
-				return "$time - INFO -->";
+				return $time.' - INFO -->';
 			case self::WARN:
-				return "$time - WARN -->";
+				return $time.' - WARN -->';
 			case self::DEBUG:
-				return "$time - DEBUG -->";
+				return $time.' - DEBUG -->';
 			case self::ERR:
-				return "$time - ERROR -->";
+				return $time.' - ERROR -->';
 			default:
-				return "$time - LOG -->";
+				return $time.' - LOG -->';
 		}
 	}
 
