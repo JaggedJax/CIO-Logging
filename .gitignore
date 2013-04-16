@@ -2,3 +2,5 @@ src/test.php
 test/
 test/*
 test.php
+/src/nbproject/private/
+/src/nbproject/
