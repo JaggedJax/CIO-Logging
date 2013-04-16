@@ -196,6 +196,7 @@ class CIOLogger {
 	 * @return void
 	 */
 	public function __construct($logDirectory, $severity) {
+		require dirname(__FILE__) . './CIOHelperFunctions.php';
 		$logDirectory = rtrim($logDirectory, '\\/');
 		$this->_canFork = function_exists('pcntl_fork');
 		$this->_canLock = $this->_canFork && function_exists('flock');
@@ -384,6 +385,11 @@ class CIOLogger {
 			if ($args !== self::NO_ARGUMENTS) {
 				/* Print the passed object value */
 				$line = $line . '; ' . var_export($args, true);
+			}
+			
+			// Include stack trace for level ERROR or worse
+			if ($severity <= self::ERR){
+				$line .= "\nStack Trace:\n".CIOHelperFunctions::stack_trace(false, false, true);
 			}
 			
 			// Set to -1 in case forking is not allowed
