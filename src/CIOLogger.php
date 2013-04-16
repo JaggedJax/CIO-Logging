@@ -9,8 +9,7 @@
  * $log->logFatal('Oh dear.'); //Prints to the log file
  * $log->logDebug('x = 5'); //Prints nothing due to current severity threshhold
  *
- * WARNING: If script can lock (flock) but not fork (pcntl_fork), logging
- * could slow down the application and you may want to disable locking as well.
+ * TODO: Generate and return a log_id for later lookup.
  * 
  * Original Author  Kenny Katzgrau <katzgrau@gmail.com>
  * MIT License
