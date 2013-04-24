@@ -223,5 +223,25 @@ class CIOHelperFunctions{
 	public static function between($n, $min, $max){
 		return isset($n) && intval($n) >= $min && intval($n) < $max;
 	}
+	
+	/**
+	 * Write an error to a log file determined by $type
+	 * Depends on CIOLog.php
+	 * @param string $message Message to write
+	 * @param string $type Log file to write to
+	 * @param boolean $echo Echo out error? Default false
+	 * @param boolean $stack_trace Include stack trace? Default false
+	 */
+	public static function write_error_to_log($message, $type='General', $echo=false, $stack_trace=false){
+		if ($stack_trace){
+			$message = $message."\nStack trace: ".helperFunctions::stack_trace(false, false, true);
+		}
+		if ($echo){
+			echo helperFunctions::text_for_web($message).'<br>';
+		}
+		require_once("CIOLog.php");
+		$log_obj = new CIOLog("./log/",$type,"monthly");
+		$log_obj->write_log(str_replace("\r", "", $message));
+	}
 }
 ?>
