@@ -42,9 +42,13 @@ Special thanks to all contributors, which right now includes three people:
 
 ## CIO Technologies Improvements
 
-This fork of KLogger currently adds Forking (flock) and Locking (pcntl_fork)
-support if the version of PHP used supports it. These features gracefully
-degrade if not available.
+This fork of KLogger currently adds the following features if available and will gracefully degrade if not:
+
+* Forking (flock)
+* Locking (pcntl_fork)
+* ForkFail and LockFail messages
+* Log IDs (almost always guaranteed to be unique for each entry)
+* Log name and Log ID prefixes
 
 ## License
 
