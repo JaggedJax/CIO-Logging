@@ -138,6 +138,7 @@ class CIOLogger {
 		'opensuccess' => 'The log file was opened successfully.',
 		'openfail' => 'The file could not be opened. Check permissions.',
 		'lockfail' => 'The file lock could not be acquired. Possibly too much logging going on.',
+		'forkfail' => 'A process failed to fork and write the log. Main thread used instead.',
 	);
 
 	/**
@@ -421,6 +422,9 @@ class CIOLogger {
 				 */
 				if ($pid && $pid != -1) {
 					 return $logID;
+				}
+				else if ($pid == -1){
+					$this->_messageQueue[] = $this->_messages['forkfail'];
 				}
 			}
 
